@@ -1,0 +1,14 @@
+{
+  "name": "highland-zip-keys",
+  "version": "1.0.0",
+  "description": "highland stream zipper that takes a mapping of keys to streams",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Luke Nimtz",
+  "license": "MIT",
+  "dependencies": {
+    "highland": "^2.10.0"
+  }
+}
