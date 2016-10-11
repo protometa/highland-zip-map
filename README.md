@@ -18,7 +18,7 @@ _.pairs({
   a: _([1,2]),
   b: _([3,4])
 }).through(zipMap)
-.flatMap((pairs) => pairs.through(reducePairsToObject)) // reducePairsToObject sold separately
+.map(pairsToObject) // pairsToObject sold separately
 // => {a: 1, b: 3}, {a: 2, b: 4}
 ```
 
