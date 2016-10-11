@@ -1,5 +1,5 @@
 {
-  "name": "highland-zip-keys",
+  "name": "highland-zip-map",
   "version": "1.0.0",
   "description": "highland stream zipper that takes a mapping of keys to streams",
   "main": "index.js",
