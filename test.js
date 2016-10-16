@@ -1,33 +1,53 @@
 "use strict";
-var _ = require('highland');
-var zipMap = require('./index');
+const _ = require('highland');
+const zipMap = require('./');
+const should = require('should');
 
-var timeout = setTimeout(function () {
-  done('timeout');
-}, 10);
-
-_.pairs({
-  a: _([1,2]),
-  b: _([3,4])
-})
-// .doto((x) => console.log('IN:', x))
-.through(zipMap)
-// .doto((x) => console.log('OUT:', x))
-.toArray((arr) => {
-  console.assert(
-    arr[0][0][0] == 'a' &&
-    arr[0][0][1] == 1 &&
-    arr[0][1][0] == 'b' &&
-    arr[0][1][1] == 3 &&
-    arr[1][0][0] == 'a' &&
-    arr[1][0][1] == 2 &&
-    arr[1][1][0] == 'b' &&
-    arr[1][1][1] == 4
-  );
-  done();
-});
-
-function done(err) {
-  if (err) throw err;
-  clearTimeout(timeout);
+function pair2obj (obj, pair) {
+  obj[pair[0]] = pair[1];
+  return obj;
 }
+
+describe('zipMap', function () {
+
+  it('zips pairs', function (done) {
+
+    _.pairs({
+      a: _([1, 2]),
+      b: _([3, 4])
+    })
+    .through(zipMap)
+    .flatMap((pairs) => 
+      _(pairs).reduce({}, pair2obj)
+    )
+    .toArray((arr) => {
+      arr.should.eql([
+        {a: 1, b: 3},
+        {a: 2, b: 4}
+      ]);
+      done();
+    });
+  });
+
+  it('zips maps', function (done) {
+    
+    _(new Map([
+      ["a", _([1, 2])],
+      ["b", _([3, 4])]
+    ]))
+    .through(zipMap)
+    .flatMap((pairs) => 
+      _(pairs).reduce(new Map, (map, pair) => 
+        map.set(pair[0], pair[1])
+      )
+    )
+    .toArray((arr) => {
+      arr.should.eql([
+        new Map([['a', 1], ['b', 3]]),
+        new Map([['a', 2], ['b', 4]])
+      ]);
+      done();
+    });
+  });
+
+});

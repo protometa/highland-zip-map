@@ -4,11 +4,15 @@
   "description": "highland stream zipper that takes a mapping of keys to streams",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "mocha test.js"
   },
   "author": "Luke Nimtz",
   "license": "MIT",
   "dependencies": {
     "highland": "^2.10.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
   }
 }
