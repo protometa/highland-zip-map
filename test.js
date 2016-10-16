@@ -36,11 +36,7 @@ describe('zipMap', function () {
       ["b", _([3, 4])]
     ]))
     .through(zipMap)
-    .flatMap((pairs) => 
-      _(pairs).reduce(new Map, (map, pair) => 
-        map.set(pair[0], pair[1])
-      )
-    )
+    .map((pairs) => new Map(pairs))
     .toArray((arr) => {
       arr.should.eql([
         new Map([['a', 1], ['b', 3]]),
