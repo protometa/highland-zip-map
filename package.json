@@ -11,6 +11,9 @@
   "dependencies": {
     "highland": "^2.10.0"
   },
+  "peerDependencies": {
+    "highland": "^2.10.0"
+  },
   "devDependencies": {
     "mocha": "^3.1.2",
     "should": "^11.1.1"
