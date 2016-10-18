@@ -23,8 +23,8 @@ _.pairs({
 
 // using Maps
 _(new Map([
-  ["a", _([1, 2])],
-  ["b", _([3, 4])]
+  ['a', _([1, 2])],
+  ['b', _([3, 4])]
 ]))
 .through(zipMap)
 .map((pairs) => new Map(pairs));
