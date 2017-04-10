@@ -1,7 +1,7 @@
 
 # Usage
 
-Takes a mapping of keys to streams and returns a stream of zipped values mapped to the original keys:
+Takes a mapping of keys to streams and returns a stream of zipped values mapped by the original keys:
 
 ```javascript
 const _ = require('highland');
