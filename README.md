@@ -1,6 +1,8 @@
 
 # Usage
 
+__For highland 2 use version 1.__
+
 Takes a mapping of keys to streams and returns a stream of zipped values mapped by the original keys:
 
 ```javascript
