@@ -1,39 +1,38 @@
-"use strict";
-const _ = require('highland');
-const zipMap = require('./');
-const should = require('should');
+'use strict'
+const _ = require('highland')
+/* eslint-env mocha */
+
+const zipMap = require('./')
+require('should')
 
 function pair2obj (obj, pair) {
-  obj[pair[0]] = pair[1];
-  return obj;
+  obj[pair[0]] = pair[1]
+  return obj
 }
 
 describe('zipMap', function () {
-
   it('zips pairs', function (done) {
-
     _.pairs({
       a: _([1, 2]),
       b: _([3, 4])
     })
     .through(zipMap)
-    .flatMap((pairs) => 
-      _(pairs).reduce({}, pair2obj)
+    .flatMap((pairs) =>
+      _(pairs).reduce(pair2obj, {})
     )
     .toArray((arr) => {
       arr.should.eql([
         {a: 1, b: 3},
         {a: 2, b: 4}
-      ]);
-      done();
-    });
-  });
+      ])
+      done()
+    })
+  })
 
   it('zips maps', function (done) {
-    
     _(new Map([
-      ["a", _([1, 2])],
-      ["b", _([3, 4])]
+      ['a', _([1, 2])],
+      ['b', _([3, 4])]
     ]))
     .through(zipMap)
     .map((pairs) => new Map(pairs))
@@ -41,9 +40,8 @@ describe('zipMap', function () {
       arr.should.eql([
         new Map([['a', 1], ['b', 3]]),
         new Map([['a', 2], ['b', 4]])
-      ]);
-      done();
-    });
-  });
-
-});
+      ])
+      done()
+    })
+  })
+})
